@@ -18,15 +18,25 @@ function ready() {
   // load image source event
   let img_tmp = new Image();
   img_tmp.onload = async evt => {
-    // draw image on canvas
+
+    // get image ref
     let img = evt.path[0];
-    canvas.width = img.width;
-    canvas.height = img.height;
-    ctx.drawImage(img, 0, 0);
+
+    // set canvas dimension
+    let ratio = 0.5; // canvas per img
+    let w = img.width * ratio;
+    let h = img.height * ratio;
+    const displaySize = { width: w, height: h }
+    faceapi.matchDimensions(canvas, displaySize) // canvas.width = w; canvas.height = h
+
+    // draw image on canvas
+    ctx.drawImage(img, 0, 0, w, h);
 
     // detect face from canvas
-    let detections = await faceapi.detectSingleFace(canvas, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
-    //detections = faceapi.resizeResults(detections, { width: canvas.width, height: canvas.height })
+    let detections = await faceapi.detectSingleFace(canvas, new faceapi.TinyFaceDetectorOptions())
+                                  .withFaceLandmarks()
+                                  .withFaceExpressions()
+    // detections = faceapi.resizeResults(detections, displaySize)
 
     // paint detected result
     if (detections) {
