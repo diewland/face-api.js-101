@@ -23,9 +23,9 @@ function ready() {
     let img = evt.path[0];
 
     // set canvas dimension
-    let ratio = 0.25; // canvas per img
-    let w = img.width * ratio;
-    let h = img.height * ratio;
+    let reduce_size = 8; // resize image
+    let w = img.width / reduce_size;
+    let h = img.height / reduce_size;
     const displaySize = { width: w, height: h }
     faceapi.matchDimensions(canvas, displaySize) // canvas.width = w; canvas.height = h
 
