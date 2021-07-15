@@ -16,11 +16,8 @@ function ready() {
   let ctx = canvas.getContext('2d');
 
   // load image source event
-  let img_tmp = new Image();
-  img_tmp.onload = async evt => {
-
-    // get image ref
-    let img = evt.path[0];
+  let img = new Image();
+  img.onload = async _ => {
 
     // set canvas dimension
     let reduce_size = 8; // resize image
@@ -53,6 +50,6 @@ function ready() {
   $('#upload-img').change(evt => {
     let [ file ] = evt.target.files
     if (!file) return;
-    img_tmp.src = URL.createObjectURL(file);
+    img.src = URL.createObjectURL(file);
   });
 }
