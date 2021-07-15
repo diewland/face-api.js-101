@@ -23,7 +23,7 @@ function ready() {
     let img = evt.path[0];
 
     // set canvas dimension
-    let ratio = 0.5; // canvas per img
+    let ratio = 0.25; // canvas per img
     let w = img.width * ratio;
     let h = img.height * ratio;
     const displaySize = { width: w, height: h }
